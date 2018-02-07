@@ -14,6 +14,12 @@ namespace OpenClassroom_AspDotNet_MVC
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
             routes.MapRoute(
+                name: "Meteo",
+                url: "{jour}/{mois}/{annee}",
+                defaults: new { controller = "Meteo", action = "Afficher" },
+                constraints: new { jour = @"\d+", mois = @"\d+", annee = @"\d{4}" });
+
+            routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
