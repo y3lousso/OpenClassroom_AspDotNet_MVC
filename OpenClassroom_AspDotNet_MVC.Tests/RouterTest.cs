@@ -1,17 +1,14 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Routing;
 using System.Web.Mvc;
 
 namespace OpenClassroom_AspDotNet_MVC.Tests
 {
-    class RoutingTest
+    [TestClass]
+    public class RouterTest
     {
         private static RouteData DefinirUrl(string url)
         {
