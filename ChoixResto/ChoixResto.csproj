@@ -107,6 +107,7 @@
     <Compile Include="Models\IDal.cs" />
     <Compile Include="Models\MyDbContext.cs" />
     <Compile Include="Models\Restaurant.cs" />
+    <Compile Include="Models\Result.cs" />
     <Compile Include="Models\Survey.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Vote.cs" />

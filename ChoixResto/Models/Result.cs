@@ -1,19 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace ChoixResto.Models
 {
-    [Table("Restaurants")]
-    public class Restaurant
+    public class Result
     {
-        public int Id { get; set; }
-        [Required]
         public string Name { get; set; }
         public string PhoneNumber { get; set; }
-
+        public int VoteAmount { get; set; }
     }
 }

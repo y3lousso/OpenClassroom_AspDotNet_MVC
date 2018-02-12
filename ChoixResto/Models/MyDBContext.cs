@@ -8,8 +8,9 @@ namespace ChoixResto.Models
 {
     public class MyDbContext : DbContext
     {
-        public DbSet<Survey> Sondages { get; set; }
+        public DbSet<Survey> Surveys { get; set; }
         public DbSet<Restaurant> Restaurants { get; set; }
+        public DbSet<User> Users { get; set; }
 
     }
 }
