@@ -1,10 +1,10 @@
-﻿using ChoixResto.Models;
+﻿using ChoixRestaurant.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace ChoixResto.ViewModels
+namespace ChoixRestaurant.ViewModels
 {
     public class HomeViewModel
     {

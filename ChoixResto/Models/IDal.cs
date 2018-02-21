@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ChoixResto.Models
+namespace ChoixRestaurant.Models
 {
     public interface IDal : IDisposable
     {
-        void CreateRestaurant(string name, string phoneNumber);
-        void ModifyRestaurant(int id, string name, string phoneNumber);
+        void CreateRestaurant(string name, string phoneNumber, string email);
+        void ModifyRestaurant(int id, string name, string phoneNumber, string email);
         bool RestaurantExist(string name);
         List<Restaurant> GetAllRestaurants();
 

@@ -1,8 +1,5 @@
-﻿@model ChoixResto.ViewModels.HomeViewModel
+﻿@model ChoixRestaurant.ViewModels.HomeViewModel
 
-@{
-    Layout = null;
-}
 
 <!DOCTYPE html>
 
@@ -13,6 +10,7 @@
 </head>
 <body>
     <div>Je suis la vue index</div>
-    @Html.Action("ShowRestaurantList")
+    @Html.ActionLink("ModifyRestaurant", "Index", "Restaurant")
+    @Html.ActionLink("CreateRestaurant", "CreateRestaurant", "Restaurant")
 </body>
 </html>

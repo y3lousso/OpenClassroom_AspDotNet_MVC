@@ -1,54 +1,73 @@
-﻿using ChoixResto.Models;
+﻿using ChoixRestaurant.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace ChoixResto.Controllers
+namespace ChoixRestaurant.Controllers
 {
     public class RestaurantController : Controller
     {
-        public ActionResult Index()
+        private IDal dal;
+
+        public RestaurantController(IDal dalIoc)
         {
-            using (IDal dal = new Dal())
-            {
-                List<Restaurant> restaurants = dal.GetAllRestaurants();
-                return View(restaurants);
-            }
+            dal = dalIoc;
         }
 
-        public ActionResult ModifierRestaurant(int? id)
+        public ActionResult Index()
+        {
+            List<Restaurant> listeDesRestaurants = dal.GetAllRestaurants();
+            return View(listeDesRestaurants);
+        }
+
+        public ActionResult ModifyRestaurant(int? id)
         {
             if (id.HasValue)
             {
-                using (IDal dal = new Dal())
-                {
-                    if (Request.HttpMethod == "POST")
-                    {
-                        string name = Request.Form["Name"];
-                        string phoneNumber = Request.Form["PhoneNumber"];
-                        dal.ModifyRestaurant(id.Value, name, phoneNumber);
-                    }
-
-                    Restaurant restaurant = dal.GetAllRestaurants().FirstOrDefault(r => r.Id == id.Value);
-                    if (restaurant == null)
-                        return View("Error");
-                    return View(restaurant);
-                }
+                Restaurant restaurant = dal.GetAllRestaurants().FirstOrDefault(r => r.Id == id.Value);
+                if (restaurant == null)
+                    return View("Error");
+                return View(restaurant);
             }
             else
-                return View("Error");
+                return HttpNotFound();
         }
 
         [HttpPost]
-        public ActionResult ModifierRestaurant(Restaurant restaurant)
+        public ActionResult ModifyRestaurant(Restaurant restaurant)
         {
-            using (IDal dal = new Dal())
+            if (!ModelState.IsValid)
             {
-                dal.ModifyRestaurant(restaurant.Id, restaurant.Name, restaurant.PhoneNumber);
+                return View(restaurant);
+            }
+            else
+            {
+                dal.ModifyRestaurant(restaurant.Id, restaurant.Name, restaurant.PhoneNumber, restaurant.Email);
                 return RedirectToAction("Index");
             }
+        }
+
+        public ActionResult CreateRestaurant()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult CreateRestaurant(Restaurant restaurant)
+        {
+            if (dal.RestaurantExist(restaurant.Name))
+            {
+                ModelState.AddModelError("Name", "Ce nom de restaurant existe déjà");
+                return View(restaurant);
+            }
+            if (!ModelState.IsValid)
+            {
+                return View(restaurant);
+            }
+            dal.CreateRestaurant(restaurant.Name, restaurant.PhoneNumber, restaurant.Email);
+            return RedirectToAction("Index");
         }
     }
 }

@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 
-namespace ChoixResto.Models
+namespace ChoixRestaurant.Models
 {
     public class Dal : IDal
     {
@@ -17,19 +17,20 @@ namespace ChoixResto.Models
         }
 
         #region Restaurant
-        public void CreateRestaurant(string name, string phoneNumber)
+        public void CreateRestaurant(string name, string phoneNumber, string email)
         {
-            db.Restaurants.Add(new Restaurant { Name = name, PhoneNumber = phoneNumber });
+            db.Restaurants.Add(new Restaurant { Name = name, PhoneNumber = phoneNumber, Email = email});
             db.SaveChanges();
         }
 
-        public void ModifyRestaurant(int id, string name, string phoneNumber)
+        public void ModifyRestaurant(int id, string name, string phoneNumber, string email)
         {
             Restaurant resto = db.Restaurants.FirstOrDefault(r => r.Id == id);
             if(resto != null)
             {
                 resto.Name = name;
                 resto.PhoneNumber = phoneNumber;
+                resto.Email = email;
                 db.SaveChanges();
             }
         }
@@ -149,7 +150,7 @@ namespace ChoixResto.Models
 
         private string EncodeMD5(string motDePasse)
         {
-            string motDePasseSel = "ChoixResto" + motDePasse + "ASP.NET MVC";
+            string motDePasseSel = "ChoixRestaurant" + motDePasse + "ASP.NET MVC";
             return BitConverter.ToString(new MD5CryptoServiceProvider().ComputeHash(ASCIIEncoding.Default.GetBytes(motDePasseSel)));
         }
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using ChoixResto.Models;
+using ChoixRestaurant.Models;
 using System.Collections.Generic;
 using System.Data.Entity;
 
@@ -29,7 +29,7 @@ public class DalTests
     [TestMethod]
     public void CreateRestaurant_AvecUnNouveauRestaurant_ObtientTousLesRestaurantsRenvoitBienLeRestaurant()
     {
-        dal.CreateRestaurant("La bonne fourchette", "0102030405");
+        dal.CreateRestaurant("La bonne fourchette", "0102030405", "abc");
         List<Restaurant> restos = dal.GetAllRestaurants();
 
         Assert.IsNotNull(restos);
@@ -41,8 +41,8 @@ public class DalTests
     [TestMethod]
     public void ModifierRestaurant_CreationDUnNouveauRestaurantEtChangementNameEtPhoneNumber_LaModificationEstCorrecteApresRechargement()
     {
-        dal.CreateRestaurant("La bonne fourchette", "0102030405");
-        dal.ModifyRestaurant(1, "La bonne cuillère", null);
+        dal.CreateRestaurant("La bonne fourchette", "0102030405", "abc");
+        dal.ModifyRestaurant(1, "La bonne cuillère", null, "abc");
 
         List<Restaurant> restos = dal.GetAllRestaurants();
         Assert.IsNotNull(restos);
@@ -54,7 +54,7 @@ public class DalTests
     [TestMethod]
     public void RestaurantExiste_AvecCreationDunRestauraunt_RenvoiQuilExiste()
     {
-        dal.CreateRestaurant("La bonne fourchette", "0102030405");
+        dal.CreateRestaurant("La bonne fourchette", "0102030405", "abc");
 
         bool existe = dal.RestaurantExist("La bonne fourchette");
 
@@ -160,7 +160,7 @@ public class DalTests
     {
         int idSurvey = dal.CreateSurvey();
         int idUser = dal.AddUser("New user", "12345");
-        dal.CreateRestaurant("La bonne fourchette", "0102030405");
+        dal.CreateRestaurant("La bonne fourchette", "0102030405", "abc");
         dal.AddVote(idSurvey, 1, idUser);
 
         bool aVote = dal.HasAlreadyVoted(idSurvey, idUser.ToString());
@@ -176,10 +176,10 @@ public class DalTests
         int idUser2 = dal.AddUser("User2", "12345");
         int idUser3 = dal.AddUser("User3", "12345");
 
-        dal.CreateRestaurant("Resto pinière", "0102030405");
-        dal.CreateRestaurant("Resto pinambour", "0102030405");
-        dal.CreateRestaurant("Resto mate", "0102030405");
-        dal.CreateRestaurant("Resto ride", "0102030405");
+        dal.CreateRestaurant("Resto pinière", "0102030405", "abc");
+        dal.CreateRestaurant("Resto pinambour", "0102030405", "abc");
+        dal.CreateRestaurant("Resto mate", "0102030405", "abc");
+        dal.CreateRestaurant("Resto ride", "0102030405", "abc");
 
         dal.AddVote(idSurvey, 1, idUser1);
         dal.AddVote(idSurvey, 3, idUser1);
@@ -208,10 +208,10 @@ public class DalTests
         int idUser1 = dal.AddUser("User1", "12345");
         int idUser2 = dal.AddUser("User2", "12345");
         int idUser3 = dal.AddUser("User3", "12345");
-        dal.CreateRestaurant("Resto pinière", "0102030405");
-        dal.CreateRestaurant("Resto pinambour", "0102030405");
-        dal.CreateRestaurant("Resto mate", "0102030405");
-        dal.CreateRestaurant("Resto ride", "0102030405");
+        dal.CreateRestaurant("Resto pinière", "0102030405","abc");
+        dal.CreateRestaurant("Resto pinambour", "0102030405", "abc");
+        dal.CreateRestaurant("Resto mate", "0102030405", "abc");
+        dal.CreateRestaurant("Resto ride", "0102030405", "abc");
         dal.AddVote(idSurvey1, 1, idUser1);
         dal.AddVote(idSurvey1, 3, idUser1);
         dal.AddVote(idSurvey1, 4, idUser1);

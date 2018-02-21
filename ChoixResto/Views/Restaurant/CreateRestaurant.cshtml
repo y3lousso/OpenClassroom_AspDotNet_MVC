@@ -1,0 +1,51 @@
+﻿@model ChoixRestaurant.Models.Restaurant
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <script type="text/javascript">
+        jQuery.validator.addMethod("verifcontact",
+            function (value, element, params) {
+                var tel = $("#" + params.parametre1).val();
+                var email = $("#" + params.parametre2).val();
+                return tel != '' || email != '';
+            });
+
+        jQuery.validator.unobtrusive.adapters.add
+            ("verifcontact", ["parametre1", "parametre2"], function (options) {
+                options.rules["verifcontact"] = options.params;
+                options.messages["verifcontact"] = options.message;
+            });
+    </script>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+    <fieldset>
+        <legend>Ajouter un restaurant</legend>
+
+        <div>
+            @Html.LabelFor(model => model.Name)
+            @Html.TextBoxFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+        <div>
+            @Html.LabelFor(model => model.PhoneNumber)
+            @Html.TextBoxFor(model => model.PhoneNumber)
+            @Html.ValidationMessageFor(model => model.PhoneNumber)
+        </div>
+        <div>
+            @Html.LabelFor(model => model.Email)
+            @Html.TextBoxFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+
+        <br />
+        <input type="submit" value="Ajouter" />
+    </fieldset>
+    }
+</body>
+</html>
+

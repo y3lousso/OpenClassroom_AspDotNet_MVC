@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Data.Entity;
 
-namespace ChoixResto.Models
+namespace ChoixRestaurant.Models
 {
     public class MyDbContext : DbContext
     {

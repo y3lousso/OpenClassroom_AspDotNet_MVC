@@ -4,15 +4,15 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
-namespace ChoixResto.Models
+namespace ChoixRestaurant.Models
 {
-    public class InitChoixResto : DropCreateDatabaseAlways<MyDbContext>
+    public class InitChoixRestaurant : DropCreateDatabaseAlways<MyDbContext>
     {
         protected override void Seed(MyDbContext context)
         {
-            context.Restaurants.Add(new Restaurant { Id = 1, Name = "Resto pinambour", PhoneNumber = "123" });
-            context.Restaurants.Add(new Restaurant { Id = 2, Name = "Resto pinière", PhoneNumber = "456" });
-            context.Restaurants.Add(new Restaurant { Id = 3, Name = "Resto toro", PhoneNumber = "789" });
+            context.Restaurants.Add(new Restaurant { Id = 1, Name = "Restaurant pinambour", PhoneNumber = "0102030405", Email = "abc" });
+            context.Restaurants.Add(new Restaurant { Id = 2, Name = "Restaurant pinière", PhoneNumber = "0102030406", Email = "abc" });
+            context.Restaurants.Add(new Restaurant { Id = 3, Name = "Restaurant toro", PhoneNumber = "0102030407", Email = "abc" });
 
             base.Seed(context);
         }
