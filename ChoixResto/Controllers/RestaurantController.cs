@@ -11,6 +11,11 @@ namespace ChoixRestaurant.Controllers
     {
         private IDal dal;
 
+        public RestaurantController() : this(new Dal())
+        {
+
+        }
+
         public RestaurantController(IDal dalIoc)
         {
             dal = dalIoc;

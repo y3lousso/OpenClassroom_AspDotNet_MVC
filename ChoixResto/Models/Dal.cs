@@ -53,12 +53,38 @@ namespace ChoixRestaurant.Models
             return db.Users.FirstOrDefault(u => u.Id == id);
         }
 
-       public User GetUser(string idStr)
+      /* public User GetUser(string idStr)
         {
             int id;
             if (int.TryParse(idStr, out id))
                 return GetUser(id);
             return null;
+        }*/
+
+        public User GetUser(string idStr)
+        {
+            switch (idStr)
+            {
+                case "Chrome":
+                    return CreeOuRecupere("Nico", "1234");
+                case "IE":
+                    return CreeOuRecupere("Jérémie", "1234");
+                case "Firefox":
+                    return CreeOuRecupere("Delphine", "1234");
+                default:
+                    return CreeOuRecupere("Timéo", "1234");
+            }
+        }
+
+        private User CreeOuRecupere(string nom, string motDePasse)
+        {
+            User utilisateur = Authentificate(nom, motDePasse);
+            if (utilisateur == null)
+            {
+                int id = AddUser(nom, motDePasse);
+                return GetUser(id);
+            }
+            return utilisateur;
         }
 
         public int AddUser(string name, string password)
@@ -79,7 +105,7 @@ namespace ChoixRestaurant.Models
 
         #region Survey/Vote
 
-        public bool HasAlreadyVoted(int idSurvey, string idStr)
+        /*public bool HasAlreadyVoted(int idSurvey, string idStr)
         {
             int id;
             if (int.TryParse(idStr, out id))
@@ -98,6 +124,19 @@ namespace ChoixRestaurant.Models
             { 
                 return false;
             }
+        }*/
+
+        public bool HasAlreadyVoted(int idSondage, string idStr)
+        {
+            User utilisateur = GetUser(idStr);
+            if (utilisateur != null)
+            {
+                Survey sondage = db.Surveys.First(s => s.Id == idSondage);
+                if (sondage.Votes == null)
+                    return false;
+                return sondage.Votes.Any(v => v.User != null && v.User.Id == utilisateur.Id);
+            }
+            return false;
         }
 
         public int CreateSurvey()

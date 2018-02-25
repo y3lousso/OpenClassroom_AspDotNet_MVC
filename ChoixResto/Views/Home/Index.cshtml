@@ -9,7 +9,11 @@
     <title>Index</title>
 </head>
 <body>
-    <div>Je suis la vue index</div>
+    <p>Prêts à choisir un restaurant ?</p>
+    @using (Html.BeginForm())
+    {
+        <input type="submit" value="Créer un sondage" />
+    }
     @Html.ActionLink("ModifyRestaurant", "Index", "Restaurant")
     @Html.ActionLink("CreateRestaurant", "CreateRestaurant", "Restaurant")
 </body>

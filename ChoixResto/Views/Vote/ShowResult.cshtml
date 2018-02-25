@@ -1,0 +1,41 @@
+﻿@model List<ChoixRestaurant.Models.Result>
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Voir les résultats</title>
+    <style type="text/css">
+        table {
+            border-collapse: collapse;
+        }
+
+        td, th {
+            border: 1px solid black;
+        }
+    </style>
+    @for (int i = 0; i < 10; i++)
+    {
+        <p>i</p>
+    }
+</head>
+<body>
+    <p>Résultats du sondage :</p>
+    <table>
+        <tr>
+            <th>Nom</th>
+            <th>Téléphone</th>
+            <th>Nombre de votes</th>
+        </tr>
+        @foreach (var result in Model)
+        {
+            <tr>
+                <td>@result.Name</td>
+                <td>@result.PhoneNumber</td>
+                <td>@result.VoteAmount</td>
+            </tr>
+        }
+    </table>
+</body>
+</html>

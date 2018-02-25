@@ -10,17 +10,28 @@ namespace ChoixRestaurant.Controllers
 {
     public class HomeController : Controller
     {
-        // GET: Home
+        private IDal dal;
+
+        public HomeController() : this(new Dal())
+        {
+        }
+
+        public HomeController(IDal dalIoc)
+        {
+            dal = dalIoc;
+        }
+
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult ShowDate(string id)
+        [HttpPost]
+        [ActionName("Index")]
+        public ActionResult IndexPost()
         {
-            ViewBag.Message = "Bonjour " + id + " !";
-            ViewData["Date"] = new DateTime(2012, 4, 28);
-            return View("Index");
+            int idSondage = dal.CreateSurvey();
+            return RedirectToAction("Index", "Vote", new { id = idSondage });
         }
 
     }
